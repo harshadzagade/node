@@ -1,0 +1,30 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "node js tutorial practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshadzagade/nodejs.git"
+  },
+  "keywords": [
+    "nodejs",
+    "tutorial",
+    "harshad",
+    "zagade"
+  ],
+  "author": "harshad zagade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harshadzagade/nodejs/issues"
+  },
+  "homepage": "https://github.com/harshadzagade/nodejs#readme",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "colors": "^1.4.0",
+    "simple-node-logger": "^21.8.12"
+  }
+}
