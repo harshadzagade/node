@@ -1,30 +1,43 @@
-const mongoose = require('mongoose');
+const express = require('express');
 
+require('./config');
+const products = require('./product');
 
-// Validation for Keys
-const productSchema = new mongoose.Schema({
-    name: String,
-    brand: String,
-    price: Number
-});
+const app = express();
 
+app.use(express.json());
 
-const SaveInDB = async () => {
-    await mongoose.connect("mongodb://127.0.0.1:27017/ecomm");
-    const ProductModel = mongoose.model('products', productSchema);
-    let data = new ProductModel({ name: "ZPro1", brand: "Oppo", price: 500 });
+app.post("/create", async (req, res) =>{
+    let data = new products(req.body);
     let result = await data.save();
     console.log(result);
+    res.send(result);
+});
 
-}
+app.get("/", async (req,res)=>{
+    let data =await products.find();
+    res.send(data);
+});
 
-const updateInDB = async () => {
-    const Product = mongoose.model('products', productSchema);
-    let data = await Product.updateOne(
-        { name: "ZPro1" },
-        { $set: { name: "ZMaX" } }
-    )
-    console.log(data);
-}
+app.get("/:id", async (req, res)=>{
+    let data = await products.findById(req.params.id);
+    res.send(data);
+})
 
-updateInDB()
+
+app.delete("/delete/:_id", async (req, res)=>{
+    let data = await products.deleteOne(req.params);
+    res.send(data);
+})
+
+
+app.put("/update/:_id",async (req, resp) => {
+    console.log(req.params)
+    let data = await products.updateOne(
+        req.params,
+        {$set: req.body}
+    );
+    resp.send(data);
+})
+
+app.listen(5000);
